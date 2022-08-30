@@ -1,15 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const citiesRouter = require('./cities')
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json("Connected to DDBB")
+  res.render('index', { title: 'Amazing Events' });
 });
 
-router.get('/:id', function(req, res, next) {
-  res.json([
-    {id: req.params.id}
-  ])
-});
+router.use('/cities', citiesRouter)
 
 module.exports = router;
