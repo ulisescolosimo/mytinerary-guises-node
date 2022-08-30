@@ -41,7 +41,32 @@ const cityController = {
         }
     },
     readAll: async(req, res) => {
-    let city = await City.find({})
+
+    let query = {}
+
+    if (req.query.city) {
+        query.city = req.query.city
+    }
+
+    if (req.query.country) {
+        query.country = req.query.country
+    }
+
+    if (req.query.photo) {
+        query.photo = req.query.photo
+    }
+
+    if (req.query.population) {
+        query.population = req.query.population
+    }
+
+    if (req.query.foundation) {
+        query.foundation = req.query.foundation
+    }
+    
+    console.log(query)
+
+    let city = await City.find(query)
     try{
         if (city) {
             res.status(200).json({
