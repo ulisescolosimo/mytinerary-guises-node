@@ -3,8 +3,8 @@ var router = express.Router();
 const {create, read, readAll, deleted} = require('../controllers/cityController')
 
 router.post('/', create);
-router.get('/:id', read);
 router.get('/', readAll);
+router.get('/:id', read);
 router.delete('/:id', deleted);
 
 
