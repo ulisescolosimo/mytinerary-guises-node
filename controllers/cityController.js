@@ -30,7 +30,7 @@ const cityController = {
                 })
             } else {
                 res.status(404).json({
-                    message: "could't find city",
+                    message: "couldn't find city",
                     success: false
                 })
             }
@@ -44,46 +44,34 @@ const cityController = {
     },
 
     readAll: async(req, res) => {
-    let query = {}
-
-    if (req.query.city) {
-        query.city = req.query.city
-    }
-
-    if (req.query.country) {
-        query.country = req.query.country
-    }
-
-    if (req.query.photo) {
-        query.photo = req.query.photo
-    }
-
-    if (req.query.population) {
-        query.population = req.query.population
-    }
-
-    if (req.query.foundation) {
-        query.foundation = req.query.foundation
-    }
-
-    let city = await City.find(query)
-    try{
-        if (city) {
-            res.status(200).json({
-                message: "you get all the cities",
-                response: city,
-                success: true
-            })
-        } else {
-            res.status(404).json({
-                message: "could't find all the cities",
-                success: false
-            })
+        let query = {}
+    
+        if (req.query.city) {
+            query.city = req.query.city
         }
-    }catch(error) {
-        console.log(error)
-    }
-    },
+    
+        if (req.query.country) {
+            query.country = req.query.country
+        }
+    
+        let city = await City.find(query)
+        try{
+            if (city.length > 0) {
+                res.status(200).json({
+                    message: "you get all the cities",
+                    response: city,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: "could't find all the cities",
+                    success: false
+                })
+            }
+        }catch(error) {
+            console.log(error)
+        }
+        },
 
     deleted: async(req, res) => {
         const {id} = req.params
@@ -127,6 +115,34 @@ const cityController = {
     }catch(error) {
         console.log(error)
     }
+    },
+
+    readCity: async(req, res) => {
+
+        try{
+            let regexp = new RegExp("^"+ req.query.city)
+
+            let cities = await City.find({city: {$regex: regexp}})
+
+            if(cities.length > 0){
+                res.status(200).json({
+                    message: "City found",
+                    response: cities,
+                    success: true
+                })
+            }else{
+                res.status(404).json({
+                    message: "City not found",
+                    success: false
+                })
+            }
+        }catch(error){
+            console.log(error)
+            res.status(500).json({
+                message: 'Error. Nothing found',
+                success: false
+            })
+        }
     }
 }
 
