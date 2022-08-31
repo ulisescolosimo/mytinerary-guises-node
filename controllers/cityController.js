@@ -1,6 +1,7 @@
 const City = require('../models/City')
 
 const cityController = {
+
     create: async(req,res) => {
         console.log(res.body)
         try {
@@ -16,6 +17,7 @@ const cityController = {
             })
         }
     },
+
     read: async(req,res) => {
         const {id} = req.params
         try {
@@ -40,8 +42,8 @@ const cityController = {
             })
         }
     },
-    readAll: async(req, res) => {
 
+    readAll: async(req, res) => {
     let query = {}
 
     if (req.query.city) {
@@ -63,8 +65,6 @@ const cityController = {
     if (req.query.foundation) {
         query.foundation = req.query.foundation
     }
-    
-    console.log(query)
 
     let city = await City.find(query)
     try{
@@ -84,6 +84,7 @@ const cityController = {
         console.log(error)
     }
     },
+
     deleted: async(req, res) => {
         const {id} = req.params
         try {
@@ -91,7 +92,6 @@ const cityController = {
             if (deleted) {
             res.status(200).json({
                 message: "deleted successfully",
-                response: deleted,
                 success: true
             })
         } else {
@@ -103,7 +103,31 @@ const cityController = {
     }catch(error) {
         console.log(error)
     }
-}
+    },
+
+    update: async(req, res) => {
+
+    const id  = req.params.id
+    const body = req.body
+
+    try {
+        let updated = await City.findByIdAndUpdate(id, body)
+        
+        if(updated) {
+        res.status(200).json({
+            message: "update successfully",
+            success: true
+        })
+    } else {
+        res.status(404).json({
+            message: "update failed",
+            success: false
+        })
+    }
+    }catch(error) {
+        console.log(error)
+    }
+    }
 }
 
 module.exports = cityController
