@@ -7,7 +7,7 @@ router.get('/', readCity)
 router.post('/', create);
 router.get('/:id', read);
 router.delete('/:id', deleted);
-router.put('/:id', update);
+router.patch('/:id', update);
 
 
 module.exports = router;
