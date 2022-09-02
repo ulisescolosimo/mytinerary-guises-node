@@ -3,7 +3,7 @@ const City = require('../models/City')
 const cityController = {
 
     create: async(req,res) => {
-        console.log(res.body)
+
         try {
             await new City(req.body).save()
             res.status(201).json({
@@ -44,17 +44,8 @@ const cityController = {
     },
 
     readAll: async(req, res) => {
-        let query = {}
     
-        if (req.query.city) {
-            query.city = req.query.city
-        }
-    
-        if (req.query.country) {
-            query.country = req.query.country
-        }
-    
-        let city = await City.find(query)
+        let city = await City.find()
         try{
             if (city.length > 0) {
                 res.status(200).json({
