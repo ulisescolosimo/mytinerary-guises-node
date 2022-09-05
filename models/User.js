@@ -7,13 +7,11 @@ const UserSchema = new mongoose.Schema({
       password:{type: String, required: true},
       photo:{type: String, required: true},
       country:{type: String, required: true},
-
 })
-
 
 const User = mongoose.model(
       'Users',
       UserSchema
 )     
- 
+
 module.exports = User
