@@ -34,6 +34,25 @@ const userController = {
             }catch(error) {
                 console.log(error)
             }
+        },
+        deleteUser: async(req, res) => {
+            const {id} = req.params
+            try {
+                let deleted = await User.findByIdAndDelete({_id:id})
+                if (deleted) {
+                res.status(200).json({
+                    message: "user deleted successfully",
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: "user deleted failed",
+                    success: false
+                })
+            }
+        }catch(error) {
+            console.log(error)
+        }
         }
     }
 
