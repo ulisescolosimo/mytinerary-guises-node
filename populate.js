@@ -1,17 +1,32 @@
+const mongoose = require('mongoose')
+
 require('dotenv').config();
 
 const db = require('./config/database')
 
 const City = require('./models/City')
 
-City.create({
+const User = require('./models/User')
+
+/* City.create({
     city: "La matanza",
     country: "Arg",
     photo: "https://images.unsplash.com/photo-1550340499-a6c60fc8287c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     population: 2161000,
     foundation: 1951-10-04,
     description: "Paris is one of the most beautiful cities in the world. It is known worldwide for the Louvre Museum, Notre-Dame cathedral, and the Eiffel tower. It has a reputation of being a romantic and cultural city."
-})
+}) */
+
+User.create(
+    {
+        "name": "Roberto",
+        "lastName": "Carlos",
+        "mail": "brasil3@gmail.com",
+        "password": "brasilcampeon",
+        "photo": "img-url241231",
+        "country": "Brasil",
+    }
+)
 
 /* City.create({
     city: "Paris",
