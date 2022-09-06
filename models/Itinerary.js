@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const ItinerarySchema = new mongoose.Schema({
       name: {type: String, required: true},
       user: {type: String},
-      city: {type: String},
+      city: {type: mongoose.Types.ObjectId, ref:'cities'},
       price: {type: Number, required: true,},
       likes: {type: Array, required: true},
       tags: {type: Array, required: true},
@@ -11,7 +11,7 @@ const ItinerarySchema = new mongoose.Schema({
 })
 
 const Itinerary = mongoose.model(
-      'Itineraries',
+      'itineraries',
       ItinerarySchema
 )     
 
