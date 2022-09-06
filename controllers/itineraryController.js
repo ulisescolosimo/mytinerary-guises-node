@@ -4,7 +4,7 @@ const Itinerary = require('../models/Itinerary')
 const itineraryController = {
 
       create: async(req, res) => {
-
+            
             try {
                   await new Itinerary(req.body).save()
                   res.status(201).json({
@@ -72,26 +72,40 @@ const itineraryController = {
         }
     },
     
-    readAll: async(req, res) => {
-    
-      let itinerary = await Itinerary.find()
-      try{
-          if (itinerary.length > 0) {
-              res.status(200).json({
-                  message: "you get all the itineraries",
-                  response: itinerary,
-                  success: true
-              })
-          } else {
-              res.status(404).json({
-                  message: "could't find all the itineraries",
-                  success: false
-              })
-          }
-      }catch(error) {
-          console.log(error)
-      }
-      },
+    readAll: async (req, res) => {
+        let itineraryFind 
+        let query = {}
+
+        /* if(req.query.user){
+            query.user = req.query.user
+        } */
+
+        if(req.query.city){
+            query.city = req.query.city
+        }
+        try {
+            itineraryFind = await Itinerary.find(query)
+                .populate('city')
+                /* .populate('user', {name:1, mail:1}) */
+            if (itineraryFind) {
+                res.status(200).json({
+                    message: "Itinerary",
+                    response: itineraryFind,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'Couldnt find itinerary',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                message: 'Itineraries not found ',
+                success: false
+            })
+        }}
 
 }
 module.exports = itineraryController
