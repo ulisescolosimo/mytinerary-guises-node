@@ -6,6 +6,6 @@ const {create, deleted, update, readAll} = require('../controllers/itineraryCont
 router.post('/', create);
 router.delete('/:id', deleted);
 router.patch('/:id', update);
-router.get('/', readAll)
+router.get('/query', readAll)
 
 module.exports = router;

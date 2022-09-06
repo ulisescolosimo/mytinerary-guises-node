@@ -7,6 +7,7 @@ const commentController = {
         let comment = await Comment.find()
             .populate('itinerary')
             
+            
         try{
             if (comment.length > 0) {
                 res.status(200).json({
