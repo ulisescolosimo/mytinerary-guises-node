@@ -1,6 +1,5 @@
 const Itinerary = require('../models/Itinerary')
 
-
 const itineraryController = {
 
     createIti: async(req, res) => {
@@ -73,48 +72,34 @@ const itineraryController = {
     },
     
     readIti: async (req, res) => {
-        let  myitinerary 
+
         let query = {}
 
         if (req.query.city) {
             query.city = req.query.city
         }
+
         if (req.query.user) {
             query.user = req.query.user
         }
 
         try {
+            let itineraries = await Itinerary.find(query)
+                .populate('user', { name: 1 })
+                .populate('city', { city: 1 })
 
-            if(query.city){
-                itinerary = await Itinerary.find({city: req.query.city})
-            }
-
-            if(query.user){
-                itinerary = await Itinerary.find({user: req.query.user})
-            }
-
-            if (itinerary.length > 0) {
-                res.status(200).json({
-                    message: 'Itineraries found successfully',
-                    response: itinerary,
-                    succes: true
-                })
-            } else {
-                res.status(404).json({
-                    message: 'Itineraries not found successfully',
-                    succes: false
-                })
-            }
-
+            res.status(200).json({
+                response: itineraries,
+                success: true,
+            })
 
         } catch (error) {
             console.log(error)
-            res.status(400).json({
-                message: 'Cannot read itinerary by ID',
-                succes: false
+            res.status(404).json({
+                message: "Itinerary not found",
+                success: false
             })
         }
-
     },
 
         readAll: async(req, res) => {

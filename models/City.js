@@ -11,7 +11,7 @@ const CitySchema = new mongoose.Schema({
 })
 
 const City = mongoose.model(
-      'City',
+      'cities',
       CitySchema
 )     
 

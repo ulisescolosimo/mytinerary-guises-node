@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { getAllComments, createComment, deleted } = require('../controllers/commentController');
+const { readAllComments, createComment, deleted } = require('../controllers/commentController');
 
-router.get('/', getAllComments);
+router.get('/', readAllComments);
 router.post('/', createComment);
 router.delete('/:id', deleted)
 
