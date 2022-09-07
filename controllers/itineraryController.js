@@ -3,29 +3,29 @@ const Itinerary = require('../models/Itinerary')
 
 const itineraryController = {
 
-      create: async(req, res) => {
+    createIti: async(req, res) => {
             
             try {
-                  await new Itinerary(req.body).save()
-                  res.status(201).json({
+                await new Itinerary(req.body).save()
+                res.status(201).json({
                         massage: 'created',
                         success:true
-                  })      
-                  
+                })      
+                
             }catch (error) {
-                  console.log(error)
-                  res.status(400).json({
+                console.log(error)
+                res.status(400).json({
                         message: 'error creating',
                         success: false
             })
-      }
+    }
 },
-      deleted: async(req,res) => {
+    deleteIti: async(req,res) => {
             const {id} = req.params
             try {
                 let deleted = await Itinerary.findByIdAndDelete({_id:id})
                 if (deleted) {
-                  res.status(200).json({
+                res.status(200).json({
                         message: "deleted successfully",
                         success: true
                     })
@@ -38,13 +38,13 @@ const itineraryController = {
             }catch (error) {
                 console.log(error)
                 res.status(404).json({
-                  message: "error",
-                  success: false
-              })
+                message: "error",
+                success: false
+            })
                 }
             },
-      
-      update: async(req, res) => {
+    
+    updateIti: async(req, res) => {
 
             const id  = req.params.id
             const body = req.body
@@ -72,40 +72,71 @@ const itineraryController = {
         }
     },
     
-    readAll: async (req, res) => {
-        let itineraryFind 
+    readIti: async (req, res) => {
+        let  myitinerary 
         let query = {}
 
-        /* if(req.query.user){
-            query.user = req.query.user
-        } */
-
-        if(req.query.city){
+        if (req.query.city) {
             query.city = req.query.city
         }
+        if (req.query.user) {
+            query.user = req.query.user
+        }
+
         try {
-            itineraryFind = await Itinerary.find(query)
-                .populate('city')
-                /* .populate('user', {name:1, mail:1}) */
-            if (itineraryFind) {
+
+            if(query.city){
+                itinerary = await Itinerary.find({city: req.query.city})
+            }
+
+            if(query.user){
+                itinerary = await Itinerary.find({user: req.query.user})
+            }
+
+            if (itinerary.length > 0) {
                 res.status(200).json({
-                    message: "Itinerary",
-                    response: itineraryFind,
-                    success: true
+                    message: 'Itineraries found successfully',
+                    response: itinerary,
+                    succes: true
                 })
             } else {
                 res.status(404).json({
-                    message: 'Couldnt find itinerary',
-                    success: false
+                    message: 'Itineraries not found successfully',
+                    succes: false
                 })
             }
+
+
         } catch (error) {
             console.log(error)
             res.status(400).json({
-                message: 'Itineraries not found ',
-                success: false
+                message: 'Cannot read itinerary by ID',
+                succes: false
             })
-        }}
+        }
 
+    },
+
+        readAll: async(req, res) => {
+    
+            let itineraries = await Itinerary.find()
+            try{
+                if (itineraries) {
+                    res.status(200).json({
+                        message: "you get all the itineraries",
+                        response: itineraries,
+                        success: true
+                    })
+                } else {
+                    res.status(404).json({
+                        message: "could't find all the itineraries",
+                        success: false
+                    })
+                }
+            }catch(error) {
+                console.log(error)
+            }
+        }
 }
+
 module.exports = itineraryController
