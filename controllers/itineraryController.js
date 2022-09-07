@@ -5,10 +5,11 @@ const itineraryController = {
     createIti: async(req, res) => {
             
             try {
-                await new Itinerary(req.body).save()
+                let itinerary = await new Itinerary(req.body).save()
                 res.status(201).json({
                         massage: 'created',
-                        success:true
+                        success:true,
+                        likes: itinerary.likes
                 })      
                 
             }catch (error) {
