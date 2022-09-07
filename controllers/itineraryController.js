@@ -87,10 +87,17 @@ const itineraryController = {
             let itineraries = await Itinerary.find(query)
                 .populate('user', { name: 1 })
                 .populate('city', { city: 1 })
+            
+                if(itineraries.length > 0) {
+                    message = "Itineraries found"
+                }else{
+                    message = "City without itineraries"
+                }
 
             res.status(200).json({
                 response: itineraries,
-                success: true,
+                message,
+                success: true
             })
 
         } catch (error) {

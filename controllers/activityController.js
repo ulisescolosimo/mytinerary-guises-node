@@ -29,7 +29,7 @@ const activityController = {
 
         try {
             let activities = await Activity.find(query)
-                .populate('itinerary', {name: 1})
+                .populate('itinerary')
 
             res.status(200).json({
                 response: activities,
