@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const {create, deleted, update, readAll} = require('../controllers/itineraryController')
+const {createIti, deleteIti, updateIti, readIti, readAll} = require('../controllers/itineraryController')
 
-router.post('/', create);
-router.delete('/:id', deleted);
-router.patch('/:id', update);
-router.get('/query', readAll)
+router.post('/', createIti);
+router.delete('/:id', deleteIti);
+router.patch('/:id', updateIti);
+router.get('/', readIti)
+router.get('/all', readAll)
 
 module.exports = router;
