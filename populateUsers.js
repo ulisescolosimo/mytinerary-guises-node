@@ -11,7 +11,7 @@ User.create({
     lastName: "Colosimo",
     mail: "colosimo@gmail.com",
     password: "hola123",
-    photo: "img-url333",
+    photo: "https://randomuser.me/api/portraits/men/21.jpg",
     country: "Argentina",
 },
 {
@@ -19,7 +19,7 @@ User.create({
     lastName: "Seia",
     mail: "guido@gmail.com",
     password: "argentian2022",
-    photo: "img-url241231",
+    photo: "https://randomuser.me/api/portraits/men/47.jpg",
     country: "Argentina",
 },
 {
@@ -27,6 +27,6 @@ User.create({
     lastName: "Carlos",
     mail: "brasil3@gmail.com",
     password: "brasilcampeon",
-    photo: "img-url241231",
+    photo: "https://randomuser.me/api/portraits/men/83.jpg",
     country: "Brasil",
 })
