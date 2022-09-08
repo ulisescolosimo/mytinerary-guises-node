@@ -13,7 +13,7 @@ const commentController = {
         try {
             let comment = await Comment.find(query)
                 .populate('itinerary', {name: 1, _id: 1})
-                .populate('user', {name: 1, lastName: 1})
+                .populate('user', {name: 1, lastName: 1, photo: 1})
 
             res.status(200).json({
                 response: comment,

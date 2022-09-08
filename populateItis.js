@@ -9,7 +9,7 @@ const Itinerary = require('./models/Itinerary')
 Itinerary.create(
     {
     name: "Central Park" ,
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553fb",
     price: 5,
     likes: [35],
@@ -17,7 +17,7 @@ Itinerary.create(
     duration: 400
     },{
     name: "Times Square",
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553fb",
     price: 2,
     likes: [5],
@@ -25,7 +25,7 @@ Itinerary.create(
     duration: 120
     },{
     name: "Statue of Liberty" ,
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553fb",
     price: 10,
     likes: [2105],
@@ -33,7 +33,7 @@ Itinerary.create(
     duration: 50
     },{
     name: "Louvre Museum",
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553f4",
     price: 5,
     likes: [6],
@@ -41,7 +41,7 @@ Itinerary.create(
     duration: 90
     },{
     name: "Notre Dame" ,
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553f4",
     price: 40,
     likes: [52],
@@ -49,7 +49,7 @@ Itinerary.create(
     duration: 120
     },{
     name: "Eiffel Tower" ,
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553f4",
     price: 60,
     likes: [23],
@@ -57,7 +57,7 @@ Itinerary.create(
     duration: 60
     },{
     name: "Buckingham Palace",
-    user: "631661f9a2e5e80a7e6185ed",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553f5",
     price: 18,
     likes: [1685],
@@ -65,7 +65,7 @@ Itinerary.create(
     duration: 60
     },{
     name: "Big Ben" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed97",
     city: "630fe20c311a12a197e553f5",
     price: 10,
     likes: [4685],
@@ -73,7 +73,7 @@ Itinerary.create(
     duration: 90
     },{
     name: "Tower Bridge" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553f5",
     price: 3,
     likes: [2425],
@@ -81,7 +81,7 @@ Itinerary.create(
     duration: 60,
     },{
     name: "The Jewish Ghetto" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553f9",
     price: 20,
     likes: [50],
@@ -89,7 +89,7 @@ Itinerary.create(
     duration: 60
     },{
     name: "Colosseum" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553f9",
     price: 40,
     likes: [1200],
@@ -97,7 +97,7 @@ Itinerary.create(
     duration: 120
     },{
     name: "Main Square" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553ff",
     price: 3,
     likes: [485],
@@ -105,7 +105,7 @@ Itinerary.create(
     duration: 200
     },{
     name: "Gran Via Street" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553ff",
     price: 6,
     likes: [85],
@@ -113,7 +113,7 @@ Itinerary.create(
     duration: 300
     },{
     name: "The Acropolis",
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553fc",
     price: 70,
     likes: [20],
@@ -121,7 +121,7 @@ Itinerary.create(
     duration: 240
     },{
     name: "Parthenon" ,
-    user: "631666c92b5cef7ed8a58bcd",
+    user: "6319367fa84e9d66368eed95",
     city: "630fe20c311a12a197e553fc",
     price: 60,
     likes: [500],
@@ -129,7 +129,7 @@ Itinerary.create(
     duration: 120
     },{
     name: "Pink House" ,
-    user: "6316675e8db7bffd0259cc9f",
+    user: "6319367fa84e9d66368eed96",
     city: "630fe20c311a12a197e553fa",
     price: 12,
     likes: [685],
@@ -137,7 +137,7 @@ Itinerary.create(
     duration: 400
     },{
     name: "Hermitage museum" ,
-    user: "6316675e8db7bffd0259cc9f",
+    user: "6319367fa84e9d66368eed96",
     city: "630fe20c311a12a197e553fe",
     price: 9,
     likes: [4532],
@@ -145,7 +145,7 @@ Itinerary.create(
     duration: 70
     },{
     name: "Anne Frank House" ,
-    user: "6316675e8db7bffd0259cc9f",
+    user: "6319367fa84e9d66368eed96",
     city: "630fe20c311a12a197e553f6",
     price: "20",
     likes: [40],
