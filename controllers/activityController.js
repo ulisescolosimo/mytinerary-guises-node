@@ -43,6 +43,29 @@ const activityController = {
                 success: false
             })
         }
+    },
+    deleted: async(req, res) => {
+        const {id} = req.params
+        try {
+            let deleted = await Activity.findByIdAndDelete({_id:id})
+            if (deleted) {
+            res.status(200).json({
+                message: "Activity deleted successfully",
+                success: true
+            })
+            } else {
+            res.status(404).json({
+                message: "Activity deleted failed",
+                success: false
+            })
+            }
+        }catch (error) {
+            console.log(error)
+            res.status(404).json({
+                message: "Activities not found",
+                success: false
+            })
+        }
     }
 }
 
