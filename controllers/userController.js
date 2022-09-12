@@ -122,7 +122,7 @@ const userController = {
             if (user) {
                 user.verified = true
                 await user.save()
-                res.redirect('http://www.google.com')
+                res.redirect('http://localhost:3000/')
             } else {
                 res.status(404).json({
                     massage: "email has not account yet",
