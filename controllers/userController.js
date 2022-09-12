@@ -122,7 +122,7 @@ const userController = {
             if (user) {
                 user.verified = true
                 await user.save()
-                res.redirect('https://www.google.com')
+                res.redirect('http://www.google.com')
             } else {
                 res.status(404).json({
                     massage: "email has not account yet",
@@ -139,7 +139,91 @@ const userController = {
             
         },
 
-        signIn: async() => {},
+        signIn: async(req, res) => {
+
+            const { email, pass , from } = req.body
+
+            try {
+                let user = await User.findOne({email})
+
+                if(!user){
+                    res.status(404).json({
+                        success: false,
+                        message: "User does not exists, please sign up",
+                    })
+                } else if(user.verified) { // si existe y esta verificado
+
+                    let checkPass = user.pass.filter(element => bcryptjs.compareSync(pass, element)) //si cada pass puede llegar a ser element. si coincide la guarda en la variable del filtro
+
+                    if(from == 'from'){
+
+                        if(checkPass.length > 0) /* le pido un length porque checkpass es un array */ {
+                            
+                            let loginUser = {
+                                id: user._id,
+                                name: user.name,
+                                email: user.email,
+                                role: user.role,
+                                photo: user.photo
+                            }
+                            
+                            user.logged = true;
+                            await user.save();
+
+                            res.status(200).json({
+                                success: true,
+                                response: {user: loginUser},
+                                message: "Welcome " + user.name
+                            })
+                            
+                        } else {
+                            res.status(400).json({
+                                success: false,
+                                message: "Username or password incorrect."
+                            })
+                        }
+                    } else {
+
+                        if (checkPass.length > 0) {
+
+                        let loginUser = {
+                            id: user._id,
+                            name: user.name,
+                            email: user.email,
+                            role: user.role,
+                            photo: user.photo
+                        }
+
+                        user.logged = true;
+                        await user.save();
+
+                        res.status(200).json({
+                            success: true,
+                            response: {user: loginUser},
+                            message: "Welcome " + user.name
+                        })
+
+                    } else {
+
+                        res.status(400).json({
+                            success: false,
+                            message: "Username or password incorrect."
+                        })
+
+                    }
+                }
+
+                } else { //si existe pero no esta verificado
+                    res.status(200).json({
+                        success: false,
+                        message: "User not verified. Please check your email and try again."
+                    })
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
         signOut: async() => {}, // findOneAndUpdate y cambiar logged de true a false
     }
