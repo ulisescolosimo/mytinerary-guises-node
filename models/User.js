@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
       country:{type: String, required: true},
       from: [{type: String, required: true}],
       logged: {type: Boolean, required: true},
-      verified: {type: Boolean, required: true}
+      verified: {type: Boolean, required: true},
+      code:{type: String, required: true}
 })
 
 const User = mongoose.model('users', UserSchema)     
