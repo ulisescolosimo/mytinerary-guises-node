@@ -35,12 +35,23 @@ const sendMail = async(mail, code) => {
     const mailOptions = {
         from: GOOGLE_USER,
         to: mail,
-        subject: 'verify my tinerary account',
+        subject: 'Verification mail for MyTinerary - Guises',
         html: `
-                <div>
-                    <h1>${mail}</h1>
-                    <a href='http://localhost:4000/auth/verify/${code}'>click to verify !</a>
+            <div style="border: 1px solid black; background-color: white; width: 100%; height: 100%;">
+                <div style="text-align: center;">
+                    <div style="width: 100%; height: 100%; background-color: black;">
+                        <img src="https://i.imgur.com/c2NEz6e.png" alt="logo" />
+                    </div>
+                    <div style="margin: 20px;">
+                        <h2 style="color: black;">Hello! You are almost there!</h2>
+                        <h3>Your email is: ${mail}</h3>
+                    </div>
                 </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <button style="background-color: white; border-radius: 30px; color:black; font-size:15px; padding: 10px; margin: 15px;"><a href='http://localhost:4000/auth/verify/${code}' style="padding-bottom: 10px; color: black; text-decoration: none;">Click to confirm your mail account!</a></button>
+                    <p>If you received this email by mistake, simply delete it. You won't be confirmed if your don't click the confirmation link above.</p>
+                </div>
+            </div>
             `
     }
 
