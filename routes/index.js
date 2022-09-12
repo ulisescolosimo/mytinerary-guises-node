@@ -8,7 +8,7 @@ const commentsRouter = require('./comments.js')
 const activitiesRouter = require('./activities.js')
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Amazing Events' });
+  res.render('index', { title: 'MyTinerary Guises' });
 });
 
 router.use('/cities', citiesRouter)
