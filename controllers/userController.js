@@ -242,7 +242,29 @@ const userController = {
             }
         },
 
-        signOut: async() => {}, // findOneAndUpdate y cambiar logged de true a false
+        signOut: async(req,res) => {
+            const id  = req.params.id
+            const body = req.body
+
+            try {
+                let updated = await User.findByIdAndUpdate(id, body)
+        
+                if(updated) {
+                    res.status(200).json({
+                    message: "update successfully",
+                    success: true
+                    })
+            } else {
+                res.status(404).json({
+                    message: "update failed",
+                    success: false
+                })
+            }
+            }catch(error) {
+                console.log(error)
+            }
+        },
+         // findOneAndUpdate y cambiar logged de true a false
     }
 
 module.exports = userController
