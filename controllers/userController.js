@@ -2,19 +2,36 @@ const User = require('../models/User')
 const crypto = require('crypto') //libreria nativa de node js para generar codigos aleatorios y unicos
 const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail')
+const Joi = require('joi')
+
+const validator = Joi.object({
+    name: Joi.string(),
+    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com'] } }),
+    pass: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    role: Joi.string(),
+    photo: Joi.string().uri().message('INVALID_URL'),
+    country: Joi.string(),
+    from: Joi.string()
+})
 
 const userController = {
     
     createUser: async(req,res) => {
         try {
+
+            let result = await validator.validateAsync(req.body)
+
+            console.log(result);
+
             await new User(req.body).save()
+
             res.status(201).json({
                 message: 'user created',
                 success: true
             })
         }catch (error) {
             res.status(400).json({
-                message: 'error creating user',
+                message: error.message,
                 success: false
             })
         }
