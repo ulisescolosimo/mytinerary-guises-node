@@ -1,10 +1,61 @@
 const City = require('../models/City')
+const Joi = require('joi')
+
+const validator = Joi.object({
+    city: Joi.string()
+    .required()
+    .min(3)
+    .messages({
+        'string.min':'city: min 3 characters'
+    }),
+
+    country: Joi.string()
+    .required()
+    .min(3)
+    .messages({
+        'string.min':'country: min 3 characters'
+    }),
+
+    photo: Joi.string()
+    .uri()
+    .required()
+    .messages({
+        'string.uri':'photo: INVALID_URL'
+    }),
+
+    population: Joi.number()
+    .min(1000)
+    .max(100000000)
+    .required()
+    .messages({
+        'number.min' : 'min-population: greater than 1000',
+        'number.max' : 'max-population: less than 100000000'
+    }),
+
+    foundation: Joi.date()
+    .less(new Date)
+    .required()
+    .messages({
+        'date.less': 'date: less than current date'  
+    }),
+    description: Joi.string()
+    .min(10)
+    .max(500)
+    .required()
+    .messages({
+        'string.min': 'password: min 10 characters',
+        'string.max': 'password: max 500 characters'
+    }),  
+})
+
 
 const cityController = {
 
     create: async(req,res) => {
 
         try {
+            let result = await validator.validateAsync(req.body)
+
             let city = await new City(req.body).save()
 
             res.status(201).json({
@@ -14,7 +65,7 @@ const cityController = {
             })
         }catch (error) {
             res.status(400).json({
-                message: 'error creating',
+                message: error.message,
                 success: false
             })
         }
