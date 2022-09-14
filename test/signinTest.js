@@ -6,6 +6,7 @@ const {assert} = require('chai')
 describe('POST /auth/signin', function () {
 
       it('must respond with 201 status code', function (done) {
+        
             request(app)
                 .post('/auth/signin')
                 .send({
@@ -20,12 +21,14 @@ describe('POST /auth/signin', function () {
             request(app)
                 .post('/auth/signin')
                 .send({  
+                  email:"guidoseia5@gmail.com",
+                  pass:"guidin",
+                  from:"form"    
                 })
                 .expect(400)
-                .end(function (err, res) {
-                    if (err) return done(err);
-                    return done();
-                })
-        })
+              .end(function (err, res) {
+                  if (err) return done(err);
+                  return done();
+              })})
 
 })
