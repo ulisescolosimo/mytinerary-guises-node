@@ -1,10 +1,58 @@
 const Itinerary = require('../models/Itinerary')
+const Joi = require('joi')
+
+const validator = Joi.object({
+    name: Joi.string()
+    .min(3)
+    .max(35)
+    .required()
+    .messages({
+        'string.min': 'name: min 3 characters',
+        'string.max': 'name: max 35 characters'
+    }),
+    user: Joi.string()
+    .required(),
+
+    city: Joi.string()
+    .min(3)
+    .required()
+    .messages({
+        'string.min' : 'city : min 3 charaacters'
+    }),
+
+    price: Joi.number()
+    .min(1)
+    .integer()
+    .required()
+    .messages({
+        'number.integer' : 'price: enter an integer',
+        'number.greater' : 'price: min 1 character'
+    }),
+
+    likes: Joi.array()
+    .required(),
+
+    tags: Joi.array()
+    .required(),
+
+    duration: Joi.number()
+    .min(1)
+    .integer()
+    .required()
+    .messages({
+        'number.integer' : 'duration: enter an integer',
+        'number.min' : 'duration: min 1 character'
+    }),
+})
+
 
 const itineraryController = {
 
     createIti: async(req, res) => {
             
             try {
+                let result = await validator.validateAsync(req.body)
+
                 let itinerary = await new Itinerary(req.body).save()
                 res.status(201).json({
                         massage: 'created',
@@ -15,7 +63,7 @@ const itineraryController = {
             }catch (error) {
                 console.log(error)
                 res.status(400).json({
-                        message: 'error creating',
+                        message: error.message,
                         success: false
             })
     }
