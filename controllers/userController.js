@@ -283,16 +283,18 @@ const userController = {
             const body = req.body
 
             try {
-                let updated = await User.findByIdAndUpdate(id, body)
-        
-                if(updated) {
-                    res.status(200).json({
-                    message: "update successfully",
-                    success: true
-                    })
+                let user = await User.findByIdAndUpdate(id, body)
+                console.log(user)
+            if(user) {
+                user.logged = false
+                await user.save()
+                res.status(200).json({
+                    success: true,
+                    message: "update ok."
+                })
             } else {
                 res.status(404).json({
-                    message: "update failed",
+                    message: "update failed.",
                     success: false
                 })
             }
@@ -300,7 +302,6 @@ const userController = {
                 console.log(error)
             }
         },
-         // findOneAndUpdate y cambiar logged de true a false
     }
 
 module.exports = userController
