@@ -5,13 +5,49 @@ const sendMail = require('./sendMail')
 const Joi = require('joi')
 
 const validator = Joi.object({
-    name: Joi.string(),
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com'] } }),
-    pass: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
-    role: Joi.string(),
-    photo: Joi.string().uri().message('INVALID_URL'),
-    country: Joi.string(),
+    name: Joi.string()
+    .min(3)
+    .max(35)
+    .required()
+    .messages({
+        'string.min': 'name: min 3 characters',
+        'string.max': 'name: max 35 characters'
+    }),
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com'] } })
+    .required()
+    .messages({
+        'string.email': 'email: the email format must be "http"'
+    }),
+
+    pass: Joi.string().
+    pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+    .min(8)
+    .max(35)
+    .required()
+    .messages({
+        'string.min': 'password: min 8 characters',
+        'string.max': 'password: max 35 characters'
+    }),
+    role: Joi.string()
+    .required(),
+
+    photo: Joi.string()
+    .uri()
+    .required()
+    .messages({
+        'string.uri':'photo: INVALID_URL'
+    }),
+
+    country: Joi.string()
+    .min(3)
+    .required()
+    .messages({
+        'string.min' : 'country : min 3 charaacters'
+    }),
+    
     from: Joi.string()
+    .required(),
 })
 
 const userController = {
