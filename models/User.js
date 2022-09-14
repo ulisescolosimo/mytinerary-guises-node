@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
       name: {type: String, required: true, min: 3, max: 35},
       email:{type: String, required: true,validate: function (value){
-            if (! value.endsWith('gmail.com') || ! value.endsWith('hotmail.com')) {
+            if (! value.endsWith('.com')) {
                throw new Error('INVALID_EMAIL')   
             }
       } },
