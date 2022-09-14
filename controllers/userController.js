@@ -17,7 +17,7 @@ const validator = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ['com'] } })
     .required()
     .messages({
-        'string.email': 'email: the email format must be "http"'
+        'string.email': 'email: the email must end with .com'
     }),
 
     pass: Joi.string().
@@ -116,6 +116,8 @@ const userController = {
             let {name,photo,country,email,pass,role,from} = req.body // tiene que venir del front para usar este metodo para ambos casos// tiene que venir del front para saber desde q red social se crea el usuario
 
             try {
+                let result = await validator.validateAsync(req.body)
+
                 let user = await User.findOne({email})
                 if(!user){
                     let logged = false
