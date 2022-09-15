@@ -7,8 +7,8 @@ const validator = Joi.object({
     .max(35)
     .required()
     .messages({
-        'string.min': 'name: min 3 characters',
-        'string.max': 'name: max 35 characters'
+        'string.min': 'Name: min 3 characters',
+        'string.max': 'Name: max 35 characters'
     }),
     user: Joi.string()
     .required(),
@@ -17,7 +17,7 @@ const validator = Joi.object({
     .min(3)
     .required()
     .messages({
-        'string.min' : 'city : min 3 charaacters'
+        'string.min' : 'City : min 3 charaacters'
     }),
 
     price: Joi.number()
@@ -25,8 +25,8 @@ const validator = Joi.object({
     .integer()
     .required()
     .messages({
-        'number.integer' : 'price: enter an integer',
-        'number.greater' : 'price: min 1 character'
+        'number.integer' : 'Price: enter an integer',
+        'number.greater' : 'Price: min 1 character'
     }),
 
     likes: Joi.array()
@@ -40,8 +40,8 @@ const validator = Joi.object({
     .integer()
     .required()
     .messages({
-        'number.integer' : 'duration: enter an integer',
-        'number.min' : 'duration: min 1 character'
+        'number.integer' : 'Duration: enter an integer',
+        'number.min' : 'Duration: min 1 character'
     }),
 })
 

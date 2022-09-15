@@ -4,14 +4,14 @@ const UserSchema = new mongoose.Schema({
       name: {type: String, required: true, min: 3, max: 35},
       email:{type: String, required: true,validate: function (value){
             if (!value.endsWith('.com')) {
-                  throw new Error('INVALID_EMAIL')   
+                  throw new Error('INVALID_EMAIL')
             }
       } },
       pass:[{type: String, required: true, min:8, max:35}],
       role: {type: String, required: true},
       photo:{type: String, required: true, validate: function (value){
             if (!value.startsWith('http')) {
-                  throw new Error('INVALID_URL')   
+                  throw new Error('photo: The photo must start with "http"')
             }
       }},
       country:{type: String, required: true},
@@ -21,6 +21,6 @@ const UserSchema = new mongoose.Schema({
       code:{type: String, required: true}
 })
 
-const User = mongoose.model('users', UserSchema)     
+const User = mongoose.model('users', UserSchema)
 
 module.exports = User

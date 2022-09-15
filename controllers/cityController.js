@@ -6,21 +6,21 @@ const validator = Joi.object({
     .required()
     .min(3)
     .messages({
-        'string.min':'city: min 3 characters'
+        'string.min':'City: min 3 characters'
     }),
 
     country: Joi.string()
     .required()
     .min(3)
     .messages({
-        'string.min':'country: min 3 characters'
+        'string.min':'Country: min 3 characters'
     }),
 
     photo: Joi.string()
     .uri()
     .required()
     .messages({
-        'string.uri':'photo: INVALID_URL'
+        'string.uri':'Photo: The photo must start with "http"'
     }),
 
     population: Joi.number()
@@ -28,23 +28,23 @@ const validator = Joi.object({
     .max(100000000)
     .required()
     .messages({
-        'number.min' : 'min-population: greater than 1000',
-        'number.max' : 'max-population: less than 100000000'
+        'number.min' : 'Min-population: greater than 1000',
+        'number.max' : 'Max-population: less than 100000000'
     }),
 
     foundation: Joi.date()
     .less(new Date)
     .required()
     .messages({
-        'date.less': 'date: less than current date'  
+        'date.less': 'Date: less than current date'  
     }),
     description: Joi.string()
     .min(10)
     .max(500)
     .required()
     .messages({
-        'string.min': 'password: min 10 characters',
-        'string.max': 'password: max 500 characters'
+        'string.min': 'Password: min 10 characters',
+        'string.max': 'Password: max 500 characters'
     }),  
 })
 

@@ -10,14 +10,14 @@ const validator = Joi.object({
     .max(35)
     .required()
     .messages({
-        'string.min': 'name: min 3 characters',
-        'string.max': 'name: max 35 characters'
+        'string.min': 'Name: min 3 characters',
+        'string.max': 'Name: max 35 characters'
     }),
     email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ['com'] } })
     .required()
     .messages({
-        'string.email': 'email: the email must end with .com'
+        'string.email': 'Email: the email must end with .com'
     }),
 
     pass: Joi.string().
@@ -26,8 +26,8 @@ const validator = Joi.object({
     .max(35)
     .required()
     .messages({
-        'string.min': 'password: min 8 characters',
-        'string.max': 'password: max 35 characters'
+        'string.min': 'Password: min 8 characters',
+        'string.max': 'Password: max 35 characters'
     }),
     role: Joi.string()
     .required(),
@@ -36,14 +36,14 @@ const validator = Joi.object({
     .uri()
     .required()
     .messages({
-        'string.uri':'photo: INVALID_URL'
+        'string.uri':'Photo: The photo must start with "http"'
     }),
 
     country: Joi.string()
     .min(3)
     .required()
     .messages({
-        'string.min' : 'country : min 3 charaacters'
+        'string.min' : 'Country : min 3 charaacters'
     }),
     
     from: Joi.string()
