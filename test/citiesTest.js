@@ -1,4 +1,4 @@
-const request = require('supertest')  
+/* const request = require('supertest')  
 const app = require('../app')         
 const {assert} = require('chai')
 
@@ -46,4 +46,4 @@ describe('POST /cities', function () {
             if(err) return done(err);  
             return done();             
       })
-})
+}) */
