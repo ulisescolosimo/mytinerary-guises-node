@@ -228,6 +228,7 @@ const userController = {
                             res.status(200).json({
                                 success: true,
                                 response: {user: loginUser},
+                                pass: user.pass,
                                 message: "Welcome " + user.name
                             })
                             
