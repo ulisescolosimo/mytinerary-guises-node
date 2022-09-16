@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const crypto = require('crypto') //libreria nativa de node js para generar codigos aleatorios y unicos
+const crypto = require('crypto') 
 const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail')
 const Joi = require('joi')
@@ -113,7 +113,7 @@ const userController = {
 
         signUp: async(req, res) => {
 
-            let {name,photo,country,email,pass,role,from} = req.body // tiene que venir del front para usar este metodo para ambos casos// tiene que venir del front para saber desde q red social se crea el usuario
+            let {name,photo,country,email,pass,role,from} = req.body 
 
             try {
                 let result = await validator.validateAsync(req.body)
@@ -123,12 +123,12 @@ const userController = {
                     let logged = false
                     let verified = false
                     let code = crypto
-                            .randomBytes(15) //15 digitos
-                            .toString('hex') // hexadecimal
+                            .randomBytes(15) 
+                            .toString('hex') 
                     if(from == 'form'){
                         pass = bcryptjs.hashSync(pass, 10)
                         user = await User({name,photo,email,country,pass: [pass],role,from: [from],logged,verified,code}).save()
-                        // aca hay que incorporar la funcion para el envio de mail de verificacion
+                        
                         sendMail(email, code);
                         res.status(200).json({
                             message: "user signed up from form",
@@ -138,7 +138,7 @@ const userController = {
                         pass = bcryptjs.hashSync(pass, 10)
                         verified = true
                         user = await new User({name,photo,email,country,pass:[pass],role,from:[from],logged,verified,code}).save()
-                        // no hace falta enviar el mail de verificacion
+                        
                         res.status(201).json({
                             message: "user signed up from "+from,
                             success: true
@@ -152,7 +152,7 @@ const userController = {
                         })
                     } else {
                         user.from.push(from)
-                        user.verified = true // si el usuario ya tiene registros previos, significa que ya se verifico en algun momento
+                        user.verified = true 
                         user.pass.push(bcryptjs.hashSync(pass, 10))
                         await user.save()
                         res.status(201).json({
@@ -206,13 +206,13 @@ const userController = {
                         success: false,
                         message: "User does not exists, please sign up",
                     })
-                } else if(user.verified) { // si existe y esta verificado
+                } else if(user.verified) { 
 
-                    let checkPass = user.pass.filter(element => bcryptjs.compareSync(pass, element)) //si cada pass puede llegar a ser element. si coincide la guarda en la variable del filtro
+                    let checkPass = user.pass.filter(element => bcryptjs.compareSync(pass, element)) 
 
                     if(from == 'from'){
 
-                        if(checkPass.length > 0) /* le pido un length porque checkpass es un array */ {
+                        if(checkPass.length > 0) {
                             
                             let loginUser = {
                                 id: user._id,
@@ -228,6 +228,7 @@ const userController = {
                             res.status(200).json({
                                 success: true,
                                 response: {user: loginUser},
+                                pass: user.pass,
                                 message: "Welcome " + user.name
                             })
                             
@@ -268,7 +269,7 @@ const userController = {
                     }
                 }
 
-                } else { //si existe pero no esta verificado
+                } else { 
                     res.status(200).json({
                         success: false,
                         message: "User not verified. Please check your email and try again."
