@@ -55,9 +55,9 @@ const itineraryController = {
 
                 let itinerary = await new Itinerary(req.body).save()
                 res.status(201).json({
-                        massage: 'created',
+                        massage: 'itinerary created',
                         success:true,
-                        likes: itinerary.likes
+                        response: itinerary
                 })      
                 
             }catch (error) {
