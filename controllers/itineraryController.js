@@ -1,21 +1,69 @@
 const Itinerary = require('../models/Itinerary')
+const Joi = require('joi')
+
+const validator = Joi.object({
+    name: Joi.string()
+    .min(3)
+    .max(35)
+    .required()
+    .messages({
+        'string.min': 'Name: min 3 characters',
+        'string.max': 'Name: max 35 characters'
+    }),
+    user: Joi.string()
+    .required(),
+
+    city: Joi.string()
+    .min(3)
+    .required()
+    .messages({
+        'string.min' : 'City : min 3 charaacters'
+    }),
+
+    price: Joi.number()
+    .min(1)
+    .integer()
+    .required()
+    .messages({
+        'number.integer' : 'Price: enter an integer',
+        'number.greater' : 'Price: min 1 character'
+    }),
+
+    likes: Joi.array()
+    .required(),
+
+    tags: Joi.array()
+    .required(),
+
+    duration: Joi.number()
+    .min(1)
+    .integer()
+    .required()
+    .messages({
+        'number.integer' : 'Duration: enter an integer',
+        'number.min' : 'Duration: min 1 character'
+    }),
+})
+
 
 const itineraryController = {
 
     createIti: async(req, res) => {
             
             try {
+                let result = await validator.validateAsync(req.body)
+
                 let itinerary = await new Itinerary(req.body).save()
                 res.status(201).json({
-                        massage: 'created',
+                        massage: 'itinerary created',
                         success:true,
-                        likes: itinerary.likes
+                        response: itinerary
                 })      
                 
             }catch (error) {
                 console.log(error)
                 res.status(400).json({
-                        message: 'error creating',
+                        message: error.message,
                         success: false
             })
     }
@@ -86,7 +134,7 @@ const itineraryController = {
 
         try {
             let itineraries = await Itinerary.find(query)
-                .populate('user', { name: 1, photo: 1 })
+                .populate('user', { name: 1, photo: 1, lastName: 1})
                 .populate('city', { city: 1 })
             
                 if(itineraries.length > 0) {
