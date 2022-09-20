@@ -1,6 +1,7 @@
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
 
+
 const {KEY_JWT} = process.env
 const User = require('../models/User')
 
@@ -13,7 +14,7 @@ passport.use(
     async(jwt_payload, done) =>{
         console.log(jwt_payload);
         try{
-            let user = await User.findOne({_id: jwt_payload.id});
+            let user = await User.findOne({_id:jwt_payload.id});
             if(user){
                 user = {
                     id: user._id,
