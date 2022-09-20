@@ -3,6 +3,8 @@ const crypto = require('crypto')
 const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail')
 const Joi = require('joi')
+const jwt = require('jsonwebtoken')
+const { KEY_JWT } = process.env
 
 const validator = Joi.object({
     name: Joi.string()
@@ -194,6 +196,25 @@ const userController = {
             
         },
 
+        verifyToken: async(req, res) => {
+            if(!req.error){
+                const token = jwt.sign({id: req.user.id}, KEY_JWT, {expiresIn: 60 * 60 * 24})
+                res.status(200).json({
+                    success: true,
+                    response: {
+                        user: req.user,
+                        token: token
+                    },
+                    message: 'Welcome '+req.user.name
+                })
+            }else{
+                res.json({
+                    success: false,
+                    message: 'Sign in please!'
+                })
+            }
+        },
+
         signIn: async(req, res) => {
 
             const { email, pass , from } = req.body
@@ -221,14 +242,16 @@ const userController = {
                                 role: user.role,
                                 photo: user.photo
                             }
-                            
-                            user.logged = true;
-                            await user.save();
+
+                            let token = jwt.sign({id: user._id}, KEY_JWT, {expiresIn: 60*60*24})
 
                             res.status(200).json({
                                 success: true,
-                                response: {user: loginUser},
-                                pass: user.pass,
+                                response: 
+                                {
+                                    user: loginUser,
+                                    token: token
+                                },
                                 message: "Welcome " + user.name
                             })
                             
@@ -253,9 +276,15 @@ const userController = {
                         user.logged = true;
                         await user.save();
 
+                        let token = jwt.sign({id: user._id}, KEY_JWT, {expiresIn: 60*60*24})
+
                         res.status(200).json({
                             success: true,
-                            response: {user: loginUser},
+                            response: 
+                            {
+                                user: loginUser,
+                                token: token
+                            },
                             message: "Welcome " + user.name
                         })
 
@@ -293,11 +322,11 @@ const userController = {
                 await user.save()
                 res.status(200).json({
                     success: true,
-                    message: "Update ok."
+                    message: "Sign out successfully."
                 })
             } else {
                 res.status(404).json({
-                    message: "Update failed.",
+                    message: "Sign out failed.",
                     success: false
                 })
             }
@@ -306,5 +335,6 @@ const userController = {
             }
         },
     }
+    
 
 module.exports = userController
