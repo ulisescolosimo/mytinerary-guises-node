@@ -285,7 +285,7 @@ const userController = {
                                 user: loginUser,
                                 token: token
                             },
-                            message: "Welcome " + user.name
+                            message: "Welcome back" + user.name
                         })
 
                     } else {
