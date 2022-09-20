@@ -180,25 +180,27 @@ const itineraryController = {
         },
         
         likeDislike: async(req, res) => {
-            let { id } = req.user
-            let { eventId } = req.body
+            let userId = req.user.id
+            let { id } = req.params
             try{
-                let itinerary = Itinerary.findOne({_id:eventId })
+                let itinerary = Itinerary.findOne({_id:id})
 
-                if(itinerary && itinerary.likes.includes(id)){
-                    await itinerary.likes.pull(id)
+                if(itinerary && itinerary.likes.includes(userId)){
+                    await itinerary.likes.pull(userId)
                     await itinerary.save()
                     res.status(200).json({
                         message: 'Itinerary disliked',
                         success: true
                     })
-                }else if(!itinerary.likes.includes(id)){
-                    await itinerary.likes.push(id)
+
+                }else if(!itinerary.likes.includes(userId)){
+                    await itinerary.likes.push(userId)
                     await itinerary.save()
                     res.status(200).json({
                         message: 'Itinerary liked',
                         success: true
                     })
+
                 }else{
                     res.status(200).json({
                         message: 'Itinerary not found',
