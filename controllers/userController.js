@@ -316,7 +316,6 @@ const userController = {
 
             try {
                 let user = await User.findByIdAndUpdate(id, body)
-                console.log(user)
             if(user) {
                 user.logged = false
                 await user.save()
