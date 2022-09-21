@@ -13,7 +13,7 @@ Itinerary.create(
     user: "632102183c77bd1a8e43794b",
     city: "6323e2f6e757fdcf61522849",
     price: 5,
-    likes: [35],
+    likes: [],
     tags: ["#Nature", "#CentralPark", "#Walk"],
     duration: 400
     },{
@@ -21,7 +21,7 @@ Itinerary.create(
     user: "632102183c77bd1a8e43794b",
     city: "6323e2f6e757fdcf61522849",
     price: 2,
-    likes: [5],
+    likes: [],
     tags: ["#City", "#NYC", "#Photography"],
     duration: 120
     },{
@@ -29,7 +29,7 @@ Itinerary.create(
     user: "632102183c77bd1a8e43794b",
     city: "6323e2f6e757fdcf61522849",
     price: 10,
-    likes: [2105],
+    likes: [],
     tags: ["#libertyisland", "#statuephotography", "#queens"],
     duration: 50
     },{
@@ -37,7 +37,7 @@ Itinerary.create(
     user: "632102183c77bd1a8e43794b",
     city: "6323e2f6e757fdcf6152284a",
     price: 5,
-    likes: [6],
+    likes: [],
     tags: ["#museum", "#louvre"],
     duration: 90
     },{
@@ -45,7 +45,7 @@ Itinerary.create(
     user: "632102183c77bd1a8e43794b",
     city: "6323e2f6e757fdcf6152284a",
     price: 40,
-    likes: [52],
+    likes: [],
     tags: ["#paris", "#instadame", "#cathedrale"],
     duration: 120
     },{
@@ -53,7 +53,7 @@ Itinerary.create(
     user: "631f8af4b0ed52fc7f717b04",
     city: "6323e2f6e757fdcf6152284a",
     price: 60,
-    likes: [23],
+    likes: [],
     tags: ["#paris", "#tower", "#parisjetaime"],
     duration: 60
     },{
@@ -61,7 +61,7 @@ Itinerary.create(
     user: "631f8af4b0ed52fc7f717b04",
     city: "6323e2f6e757fdcf61522848",
     price: 18,
-    likes: [1685],
+    likes: [],
     tags: ["#britishroyalfamily", "#queenelizabeth", "#duchessofcambridge"],
     duration: 60
     },{
@@ -69,7 +69,7 @@ Itinerary.create(
     user: "631f8af4b0ed52fc7f717b04",
     city: "6323e2f6e757fdcf61522848",
     price: 10,
-    likes: [4685],
+    likes: [],
     tags: ["#bigben" ,  "#visitlondon", "#steelcity"],
     duration: 90
     },{
@@ -77,7 +77,7 @@ Itinerary.create(
     user: "631f8af4b0ed52fc7f717b04",
     city: "6323e2f6e757fdcf61522848",
     price: 3,
-    likes: [2425],
+    likes: [],
     tags: ["#bridge" ,  "#tower", "#london"],
     duration: 60,
     },{
@@ -85,7 +85,7 @@ Itinerary.create(
     user: "631f8af4b0ed52fc7f717b04",
     city: "6323e2f6e757fdcf61522847",
     price: 20,
-    likes: [50],
+    likes: [],
     tags: ["#rome", "#italy", "#jewish"],
     duration: 60
     },{
@@ -93,7 +93,7 @@ Itinerary.create(
     user: "631f8af4b0ed52fc7f717b04",
     city: "6323e2f6e757fdcf61522847",
     price: 40,
-    likes: [1200],
+    likes: [],
     tags: ["#rome", "#forum" , "#colosseum"],
     duration: 120
     },{
@@ -101,7 +101,7 @@ Itinerary.create(
     user: "631f8b37b0ed52fc7f717b0a",
     city: "6323e2f6e757fdcf6152284b",
     price: 3,
-    likes: [485],
+    likes: [],
     tags: ["#square",  "#madrid", "#spain"],
     duration: 200
     },{
@@ -109,7 +109,7 @@ Itinerary.create(
     user: "631f8b37b0ed52fc7f717b0a",
     city: "6323e2f6e757fdcf6152284b",
     price: 6,
-    likes: [85],
+    likes: [],
     tags: ["#street",  "#madrid", "#granvia"],
     duration: 300
     },{
@@ -117,7 +117,7 @@ Itinerary.create(
     user: "631f8b37b0ed52fc7f717b0a",
     city: "6323e2f6e757fdcf6152284e",
     price: 70,
-    likes: [20],
+    likes: [],
     tags: ["#athens", "#greek", "#archaeological"],
     duration: 240
     },{
@@ -125,7 +125,7 @@ Itinerary.create(
     user: "631f8b37b0ed52fc7f717b0a",
     city: "6323e2f6e757fdcf6152284e",
     price: 60,
-    likes: [500],
+    likes: [],
     tags: ["#athens", "#greek", "#majestic", "#ruins"],
     duration: 120
     },{
@@ -133,7 +133,7 @@ Itinerary.create(
     user: "631f8b37b0ed52fc7f717b0a",
     city: "6323e2f6e757fdcf6152284f",
     price: 12,
-    likes: [685],
+    likes: [],
     tags: ["#pink",  "#capital", "#government"],
     duration: 400
     },{
@@ -141,7 +141,7 @@ Itinerary.create(
     user: "631f8b37b0ed52fc7f717b0a",
     city: "6323e2f6e757fdcf6152284d",
     price: 9,
-    likes: [4532],
+    likes: [],
     tags: ["#museum",  "#culture", "#art"],
     duration: 70
     },{
@@ -149,7 +149,7 @@ Itinerary.create(
     user: "632102183c77bd1a8e43794b",
     city: "6323e2f6e757fdcf61522845",
     price: "20",
-    likes: [40],
+    likes: [],
     tags: ["diary", "annefrank", "#IIWW", "#holand"],
     duration: 60
     }

@@ -29,21 +29,52 @@ const commentController = {
         }
     },
 
-    createComment: async(req, res) => {
-            try {
-                await new Comment(req.body).save()
-                res.status(201).json({
-                    message: 'Comment created',
-                    success: true
-                })
-            }catch (error) {
-                res.status(400).json({
-                    message: 'error creating Comment',
-                    success: false
-                })
-            }
-        },
-    
+    createComment: async (req, res) => {
+        const {comment}  = req.body.comment
+        const {itinerary} = req.body.itinerary
+        let userId = req.user.id
+        try {
+            let newComment = await Comment.findOneAndUpdate(
+                {_id:comment}, {$push: {comment: comment, user: userId, itinerary: itinerary}}, {new: true}).populate("comment.userId")
+
+            res.status(200).json({
+                success: true, 
+                message: "Thanks for your comment !" })
+                console.log(newComment);
+        }
+        catch(error) {
+            console.log(error)
+            res.json({
+                success: false, 
+                message: "Error creating Comment"
+            })
+        }
+    },
+
+    modifyComment: async (req, res) => {
+        console.log(req.body)
+        const {comment}  = req.body.comment
+        let userId = req.user.id
+  
+        try {
+          const newComment = await Comment.findOneAndUpdate(
+            { "comment._id": req.params },{ $set: { "comment": req.body.comment }}, { new: true }).populate("comments.userId",);
+  
+            res.status(200).json({
+            success: true,
+            response: { newComment },
+            message: "Your comment has been modified",
+          });
+          console.log(newComment)
+        } catch (error) {
+          console.log(error);
+          res.json({
+            success: true,
+            message: "",
+          });
+        }
+      },
+ 
 
     deleted: async(req,res) => {
     const {id} = req.params
