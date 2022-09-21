@@ -1,7 +1,7 @@
 const request = require('supertest')  
 const app = require('../app')         
 const {assert} = require('chai')
-
+/
 describe('POST /itineraries', function () {
       
       it('Must respond with the likes', function (done) {
@@ -57,11 +57,8 @@ describe('POST /itineraries', function () {
       it('Read all itineraries', function (done) {
             request(app)
             .get('/itineraries/all')
-            .expect(200)
-            .end(function (err, res){
-                  if(err) return done(err);  
-                  return done();             
+            .expect(200,done)
+                 
             })
 
   })
-})
