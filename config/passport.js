@@ -8,7 +8,7 @@ passport.use(
     new passportJwt.Strategy(
     {
         jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: KEY_JWT
+        secretOrKey: KEY_JWT,
     },
     async(jwt_payload, done) =>{
         console.log(jwt_payload);
