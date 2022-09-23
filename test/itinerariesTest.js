@@ -4,24 +4,6 @@ const {assert} = require('chai')
 /
 describe('POST /itineraries', function () {
       
-      it('Must respond with the likes', function (done) {
-            request(app)
-                .post('/itineraries')
-                .send({
-                  name: "Central Park" ,
-                  user: "631661f9a2e5e80a7e6185ed",
-                  city: "630fe20c311a12a197e553fb",
-                  price: 5,
-                  likes: [35],
-                  tags: ["#Nature", "#CentralPark", "#Walk"],
-                  duration: 400
-                })
-                .then(response => {
-                    assert.isNotNumber(response.body.likes)
-                    done()
-                })
-        })
-      
       it('Must respond with 201 status code', function (done) {
           request(app)
               .post('/itineraries')

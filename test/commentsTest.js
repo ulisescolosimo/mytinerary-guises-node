@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../app')         
 const {assert} = require('chai')
 
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWY4YWY0YjBlZDUyZmM3ZjcxN2IwNCIsImlhdCI6MTY2MzgwMDI2NiwiZXhwIjoxNjYzODg2NjY2fQ.OWDb8f3D7eikeJYPrBfEmRw0DIu-XFTTHNHIk2Crd8g"
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWY4YWY0YjBlZDUyZmM3ZjcxN2IwNCIsImlhdCI6MTY2Mzk0MDQzOCwiZXhwIjoxNjY0MDI2ODM4fQ.-j195Sd8k1p2iC61A__lxuMUMJ8MwCbpMFRR4L0W5K0"
 
  describe('POST /comments', function () {  
 
@@ -33,10 +33,10 @@ describe('PATCH /comments', function () {
       // test para modificación de comentario
       it('Must respond with 200 status code, comment modify', function (done) {
           request(app)
-              .patch('/comments/632b94aa5be2c3687aeb53ef')
+              .patch('/comments/632dc4a990e5ea4e5a33fd7e')
               .send(
                   {
-                      "comment": "comment modified",
+                      "comment": "Beautiful travel !",
                   }
               )
               .set('Authorization', `Bearer ${token}`)

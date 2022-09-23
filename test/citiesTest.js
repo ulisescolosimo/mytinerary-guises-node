@@ -8,8 +8,8 @@ describe('POST /cities', function () {
             request(app)
             .post('/cities')      
             .send({ 
-                  city :"cordoba",
-                        country:"argentina",
+                  city :"Cordoba",
+                        country:"Argentina",
                         photo: "http",                           
                         population: 34567543,                            
                         foundation: "1568",
@@ -26,11 +26,11 @@ describe('POST /cities', function () {
                   .post('/cities')        
                   .send({                 
                         city :"cordoba",
-                        country:"argentina",
+                        country:"Argentina",
                         photo: "http",                            
-                        population: 34567543,                            
-                        foundation: "1568",
-                        description: "atr",
+                        population: 23454,                            
+                        foundation: "2890",
+                        description: "atr loco",
                   })
                   .expect(201, done)                 
                
@@ -46,4 +46,4 @@ describe('POST /cities', function () {
             if(err) return done(err);  
             return done();             
       })
-}) */
+})  */
