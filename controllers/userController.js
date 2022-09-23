@@ -3,6 +3,8 @@ const crypto = require('crypto')
 const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail')
 const Joi = require('joi')
+const jwt = require('jsonwebtoken')
+const { KEY_JWT } = process.env
 
 const validator = Joi.object({
     name: Joi.string()
@@ -62,7 +64,7 @@ const userController = {
             await new User(req.body).save()
 
             res.status(201).json({
-                message: 'user created',
+                message: 'User created',
                 success: true
             })
         }catch (error) {
@@ -97,12 +99,12 @@ const userController = {
                 let deleted = await User.findByIdAndDelete({_id:id})
                 if (deleted) {
                 res.status(200).json({
-                    message: "user deleted successfully",
+                    message: "User deleted successfully",
                     success: true
                 })
             } else {
                 res.status(404).json({
-                    message: "user deleted failed",
+                    message: "User deleted failed",
                     success: false
                 })
             }
@@ -131,7 +133,7 @@ const userController = {
                         
                         sendMail(email, code);
                         res.status(200).json({
-                            message: "user signed up from form",
+                            message: "User signed up from form",
                             success: true
                         })
                     } else {
@@ -140,14 +142,14 @@ const userController = {
                         user = await new User({name,photo,email,country,pass:[pass],role,from:[from],logged,verified,code}).save()
                         
                         res.status(201).json({
-                            message: "user signed up from "+from,
+                            message: "User signed up from: "+from,
                             success: true
                         })
                     }
                 } else {
                     if(user.from.includes(from)){
                         res.status(200).json({
-                            message: "user already registered through this method",
+                            message: "User already registered through this method",
                             success: false
                         })
                     } else {
@@ -156,7 +158,7 @@ const userController = {
                         user.pass.push(bcryptjs.hashSync(pass, 10))
                         await user.save()
                         res.status(201).json({
-                            message: "user signed up from: " + from,
+                            message: "User signed up from: " + from,
                             success: true
                         })
                     }
@@ -164,7 +166,7 @@ const userController = {
             }catch (error){
                 console.log(error);
                 res.status(400).json({
-                    message: "couldn't signed up",
+                    message: "Couldn't signed up",
                     success: false
                 })
             }
@@ -180,18 +182,37 @@ const userController = {
                 res.redirect('http://localhost:3000/')
             } else {
                 res.status(404).json({
-                    massage: "email has not account yet",
+                    massage: "Email has not account yet",
                     success:false
                 })
             }
             } catch (error) {
                 console.log(error)
                 res.status(400).json({
-                    message: "could't verify account",
+                    message: "Couldn't verify account",
                     success: false
                 })
             }
             
+        },
+
+        verifyToken: async(req, res) => {
+            if(!req.error){
+                const token = jwt.sign({id: req.user.id}, KEY_JWT, {expiresIn: 60 * 60 * 24})
+                res.status(200).json({
+                    success: true,
+                    response: {
+                        user: req.user,
+                        token: token
+                    },
+                    message: 'Welcome '+req.user.name
+                })
+            }else{
+                res.json({
+                    success: false,
+                    message: 'Sign in please!'
+                })
+            }
         },
 
         signIn: async(req, res) => {
@@ -221,14 +242,16 @@ const userController = {
                                 role: user.role,
                                 photo: user.photo
                             }
-                            
-                            user.logged = true;
-                            await user.save();
+
+                            let token = jwt.sign({id: user._id}, KEY_JWT, {expiresIn: 60*60*24})
 
                             res.status(200).json({
                                 success: true,
-                                response: {user: loginUser},
-                                pass: user.pass,
+                                response: 
+                                {
+                                    user: loginUser,
+                                    token: token
+                                },
                                 message: "Welcome " + user.name
                             })
                             
@@ -253,10 +276,16 @@ const userController = {
                         user.logged = true;
                         await user.save();
 
+                        let token = jwt.sign({id: user._id}, KEY_JWT, {expiresIn: 60*60*24})
+
                         res.status(200).json({
                             success: true,
-                            response: {user: loginUser},
-                            message: "Welcome " + user.name
+                            response: 
+                            {
+                                user: loginUser,
+                                token: token
+                            },
+                            message: "Welcome back" + user.name
                         })
 
                     } else {
@@ -287,17 +316,16 @@ const userController = {
 
             try {
                 let user = await User.findByIdAndUpdate(id, body)
-                console.log(user)
             if(user) {
                 user.logged = false
                 await user.save()
                 res.status(200).json({
                     success: true,
-                    message: "update ok."
+                    message: "Sign out successfully."
                 })
             } else {
                 res.status(404).json({
-                    message: "update failed.",
+                    message: "Sign out failed.",
                     success: false
                 })
             }
@@ -306,5 +334,6 @@ const userController = {
             }
         },
     }
+    
 
 module.exports = userController

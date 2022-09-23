@@ -177,6 +177,43 @@ const itineraryController = {
             }catch(error) {
                 console.log(error)
             }
+        },
+        
+        likeDislike: async(req, res) => {
+            let userId = req.user.id
+            let { id } = req.params
+            try{
+                let itinerary = await Itinerary.findOne({_id:id})
+
+                if(itinerary.likes.includes(userId)){
+                    await Itinerary.findOneAndUpdate({_id:id}, {$pull:{likes:userId}}, {new: true})
+                    res.status(200).json({
+                        message: 'Itinerary disliked',
+                        success: true
+                    })
+
+                }else if(!itinerary.likes.includes(userId)){
+                    await Itinerary.findOneAndUpdate({_id:id}, {$push:{likes:userId}}, {new: true})
+                    res.status(200).json({
+                        message: 'Itinerary liked',
+                        success: true
+                    })
+
+                }else{
+                    res.status(200).json({
+                        message: 'Itinerary not found',
+                        success: true
+                    })
+                }
+
+            }catch(error) {
+                console.log(error);
+                res.json({
+                    message: 'error',
+                    success: false
+                })
+            }
+            
         }
 }
 
