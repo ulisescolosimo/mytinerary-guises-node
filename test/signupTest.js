@@ -40,7 +40,7 @@ describe('POST /auth/signup', function () {
               .post('/auth/signup')
               .send({ 
                 name: "Ulises colosimo" ,
-                email: "ulisescolosimo@gmail.com",
+                email: "ulisescolosimoAcade@gmail.com",
                 pass: "ulisesAcadee",
                 role: "user",
                 photo: "https://pbs.twimg.com/profile_images/973255823148355584/PQrQ_HzA_400x400.jpg",
@@ -49,4 +49,4 @@ describe('POST /auth/signup', function () {
               })
               .expect(201, done)               
       })
-})  
+})   
